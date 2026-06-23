@@ -1,4 +1,5 @@
 import { clampMinutes, formatTime, getNextTick, secondsFromMinutes } from "./timer-core.js";
+import { loadStoredMinutes, saveStoredMinutes } from "./storage.js";
 
 const minutesEl = document.querySelector("#minutes");
 const secondsEl = document.querySelector("#seconds");
@@ -9,7 +10,7 @@ const startButton = document.querySelector("#start");
 const pauseButton = document.querySelector("#pause");
 const resetButton = document.querySelector("#reset");
 
-let selectedMinutes = clampMinutes(customMinutesEl.value);
+let selectedMinutes = clampMinutes(loadStoredMinutes() ?? customMinutesEl.value);
 let remainingSeconds = secondsFromMinutes(selectedMinutes);
 let timerId = null;
 
@@ -32,6 +33,7 @@ function selectDuration(minutes) {
   selectedMinutes = clampMinutes(minutes);
   remainingSeconds = secondsFromMinutes(selectedMinutes);
   customMinutesEl.value = String(selectedMinutes);
+  saveStoredMinutes(selectedMinutes);
 
   presetButtons.forEach((button) => {
     button.classList.toggle("is-active", Number(button.dataset.minutes) === selectedMinutes);
@@ -95,4 +97,4 @@ startButton.addEventListener("click", startTimer);
 pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
 
-render();
+selectDuration(selectedMinutes);
