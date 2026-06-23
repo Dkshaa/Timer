@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Timer</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="timer-app" aria-labelledby="app-title">
+      <section class="timer-panel">
+        <p class="eyebrow">Focus timer</p>
+        <h1 id="app-title">Timer</h1>
+
+        <div class="display" aria-live="polite">
+          <span id="minutes">25</span><span aria-hidden="true">:</span><span id="seconds">00</span>
+        </div>
+
+        <div class="preset-row" aria-label="Timer presets">
+          <button class="preset is-active" type="button" data-minutes="5">5m</button>
+          <button class="preset" type="button" data-minutes="15">15m</button>
+          <button class="preset" type="button" data-minutes="25">25m</button>
+          <button class="preset" type="button" data-minutes="45">45m</button>
+        </div>
+
+        <label class="custom-time">
+          <span>Custom minutes</span>
+          <input id="custom-minutes" type="number" min="1" max="180" step="1" value="25">
+        </label>
+
+        <div class="actions">
+          <button id="start" type="button">Start</button>
+          <button id="pause" type="button">Pause</button>
+          <button id="reset" type="button">Reset</button>
+        </div>
+
+        <p id="status" class="status">Ready when you are.</p>
+      </section>
+    </main>
+
+    <script type="module" src="src/timer.js"></script>
+  </body>
+</html>
