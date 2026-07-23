@@ -8,6 +8,7 @@ A lightweight browser timer for focused work sessions, quick breaks, and repeata
 - Quick presets for common focus sessions
 - Custom minute input for ad hoc timers
 - Local preference storage for the last selected duration
+- Browser notification when a timer finishes, when permission is granted
 - No build step required for everyday use
 
 ## Run Locally
@@ -19,3 +20,24 @@ python3 -m http.server 8000
 ```
 
 Then visit `http://localhost:8000`.
+
+## Notifications
+
+The app asks for notification permission the first time you start a timer in browsers that support the Notifications API. If permission is denied or unsupported, the countdown still completes normally and shows the in-page status message.
+
+## Test
+
+The pure timer helpers can be tested with Node.js.
+
+```bash
+npm test
+```
+
+## Project Structure
+
+- `index.html` contains the app markup
+- `styles.css` contains the responsive layout and visual styling
+- `src/timer.js` wires browser events to countdown behavior
+- `src/timer-core.js` contains testable timer helpers
+- `src/storage.js` keeps the selected duration between visits
+- `src/notifications.js` handles optional completion notifications

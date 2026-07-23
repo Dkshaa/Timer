@@ -1,4 +1,5 @@
 import { clampMinutes, formatTime, getNextTick, secondsFromMinutes } from "./timer-core.js";
+import { notifyTimerComplete, requestNotificationPermission } from "./notifications.js";
 import { loadStoredMinutes, saveStoredMinutes } from "./storage.js";
 
 const minutesEl = document.querySelector("#minutes");
@@ -42,10 +43,12 @@ function selectDuration(minutes) {
   render();
 }
 
-function startTimer() {
+async function startTimer() {
   if (timerId !== null) {
     return;
   }
+
+  await requestNotificationPermission();
 
   if (remainingSeconds === 0) {
     remainingSeconds = secondsFromMinutes(selectedMinutes);
@@ -58,6 +61,7 @@ function startTimer() {
 
     if (remainingSeconds === 0) {
       stopTimer();
+      notifyTimerComplete();
       setStatus("Time is up.");
     }
   }, 1000);
