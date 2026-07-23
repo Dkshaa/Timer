@@ -21,6 +21,10 @@ python3 -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
+## Notifications
+
+The app asks for notification permission the first time you start a timer in browsers that support the Notifications API. If permission is denied or unsupported, the countdown still completes normally and shows the in-page status message.
+
 ## Test
 
 The pure timer helpers can be tested with Node.js.
