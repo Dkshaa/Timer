@@ -36,7 +36,10 @@ function selectDuration(minutes) {
   saveStoredMinutes(selectedMinutes);
 
   presetButtons.forEach((button) => {
-    button.classList.toggle("is-active", Number(button.dataset.minutes) === selectedMinutes);
+    const isSelected = Number(button.dataset.minutes) === selectedMinutes;
+
+    button.classList.toggle("is-active", isSelected);
+    button.setAttribute("aria-pressed", String(isSelected));
   });
 
   render();
